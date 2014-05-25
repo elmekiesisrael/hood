@@ -1,0 +1,343 @@
+/* 
+    Created on : 03/04/2014, 14:06:43
+    Author     : Yonatan Karp, Israel Elmekies & Yuval Bar-Zik
+*/
+
+.login-background {
+    background-image: url("/neighborhoods/images/login.png");
+}
+
+.like {
+    padding-left: 32%;
+    float: top;
+}
+
+.dislike {
+    padding-left: 7%;
+    float: top;
+}
+
+.section-style {
+    padding-top: 52px;
+    min-height: 483px;   
+}
+
+#new-post-header {
+    margin-right: 70%;
+}
+
+.posts-info {
+}
+
+#send-private-message {
+    text-align: center; 
+    color: #aaa
+}
+#incoming-messages-header {
+    margin-right: 180px;
+}
+
+.message-date {
+    font-size: 14px;
+}
+.message-sender {
+    margin-top: 4px;
+    font-size: 14px;
+    font-weight:bold;
+    white-space:nowrap;
+}
+
+.message-content {
+    font-size: 14px;
+    word-wrap: break-word;
+}
+
+.user-about {
+    padding-left: 10%;
+    font-size: 18px;
+}
+
+#send-message-textarea {
+    height: 224px;
+}
+
+
+/*
+ * Classes for the user picture and name
+ */
+.user-link {
+    color: #828282;
+    padding-left: 100px;
+    font-size: 13px;
+    font-style: italic;
+    float: top;   
+}
+.user-picture {
+    border-color: #ECEDF2;
+    margin-top: 20px;
+    margin-left: 20px;
+    width: 80px;
+    height: 80px;
+    border-radius: 150px;
+    border-width: 2px;
+    background-size: cover;
+    float: left;
+    -webkit-border-radius: 150px;
+    -moz-border-radius: 150px;
+    box-shadow: 2px 1px 10px #d6d6d6; 
+}
+
+/* Classes for post design */
+.post-icon {
+    border-color: #ECEDF2;
+    margin-left: 11px;
+    width: 40px;
+    height: 40px;
+    border-radius: 150px;
+    border-width: 2px;
+    background-size: cover;
+    float: left;
+    -webkit-border-radius: 150px;
+    -moz-border-radius: 150px;
+}
+
+
+.user-name {
+    padding-left: 50%;
+    padding-top: 13%;
+    color: #828282;
+    font-size: 20px;
+    //font-size: 1em;
+}
+
+/*
+ * class for the subject of each post page.
+ */
+.post-subject {
+   font-size: 2em;
+   font-weight: bold;
+   padding-left: 6%;
+   padding-right: 6%;
+   padding-top: 2%;
+}
+
+/*
+ * class for the author name of each post page.
+ */
+.post-author,
+.post-artist,
+.post-album_song,
+.post-genre,
+.sign-up-forms{
+   font-size: 1em;
+   font-weight: bold;
+   padding-top: 1%;
+   padding-left: 6%;
+   padding-right: 6%; 
+}
+
+.post-content {
+    text-align: justify;
+    text-justify: newspaper;    
+    padding-top: 3%;
+    padding-bottom: 3%;
+    padding-left: 6%;
+    padding-right: 6%; 
+}
+
+/*
+ * classes for messages.
+ */
+ /** new css code - boaz second edition **/
+.bubbles-container {
+	padding-top:15px;
+}
+
+.bubbledLeft, .bubbledRight {
+    clear: both;
+    margin-top: 5px;
+    max-width: 80%;
+    position: relative;
+	z-index:1;
+	border-radius: 5px 5px 5px 0px;
+	-webkit-border-radius: 5px 5px 5px 0px;
+	-moz-border-radius: 5px 5px 5px 0px;
+	-o-border-radius: 5px 5px 5px 0px;
+	-ms-border-radius: 5px 5px 5px 0px;
+}
+
+.bubbledLeft {
+    float: left;
+    margin-right: auto;
+    padding: 4px 10px 4px 15px;
+    text-align: left;
+}
+
+.bubbledLeft:before {
+    border-image: url("../images/speech_bubble_left.png") 8 10 8 17;
+    border-width: 8px 10px 8px 17px;
+    bottom: 0;
+    content: "";
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: -1;
+	border-image: url("../images/speech_bubble_left.png") 8 10 8 17 stretch;
+	-webkit-border-image: url("../images/speech_bubble_left.png") 8 10 8 17 stretch;
+	-moz-border-image: url("../images/speech_bubble_left.png") 8 10 8 17 stretch;
+	-o-border-image: url("../images/speech_bubble_left.png") 8 10 8 17 stretch;
+}
+
+.bubbledRight {
+    float: right;
+    margin-left: auto;
+    padding: 4px 15px 4px 10px;
+    text-align: right;
+}
+
+.bubbledRight:before {
+    border-image: url("../images/speech_bubble_right.png") 8 17 8 10;
+    border-width: 8px 17px 8px 10px;
+    bottom: 0;
+    content: "";
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: -1;
+        border-image: url("../images/speech_bubble_right.png") 8 17 8 10 stretch stretch;
+        -webkit-border-image: url("../images/speech_bubble_right.png") 8 17 8 10 stretch stretch;
+        -moz-border-image: url("../images/speech_bubble_right.png") 8 17 8 10 stretch stretch;
+        -o-border-image: url("../images/speech_bubble_right.png") 8 17 8 10 stretch stretch;
+}
+
+/*
+ * Classes design the sign-in
+ */
+#sign-in {
+    background:  url('../images/login.png') no-repeat center left;
+    background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+    height: auto !important;
+    min-height:100%;
+    background-size: cover;
+}
+
+.signin-forms {
+    height: 3em; // Specify Height
+    text-align:center; /*Align the text to the center*/    
+    margin-top: 55%;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.sign-up-header {
+    text-align: center;
+    padding-right: 4%;
+    padding-left: 4%;
+}
+
+.sign-up-text {
+    padding-left: 4%;
+    padding-right: 4%;
+}
+
+.validate_error_messages {
+    font-weight: bold;
+    color: #f95151;
+}
+
+#back_button {
+    padding-right: 3%;
+}
+
+#empty-space {
+    padding-top: 60%;    
+}
+
+.form-background {
+    background-color:rgba(255,255,255,0.55);
+    margin-left: 1%;
+    margin-right: 1%;
+    height: 35px;
+    
+}
+
+#signin-button {
+    background-color:rgba(30,255,255,0.3) !important;
+}
+
+#form-login-btn {
+    appearance: hyperlink;
+    margin-left: 0%;
+    margin-right: 15%;
+}
+
+.sign-up-link {
+    color: white;
+    font-weight: bold;
+    font-size: large;
+}
+
+.validate_error_messages_signin {
+    margin-top: -10px;
+    font-weight: normal;
+    color: white;
+}
+
+.like-button-active {
+    color: #99cc00;
+    padding-left: 100px;
+    font-size: 15px;
+    font-style: italic;
+    float: top;
+}
+
+.dislike-button-active {
+    color: #f95151;
+    padding-left: 50px;
+    font-size: 15px;
+    font-style: italic;
+    float: top;
+}
+
+
+#unlike-button4 {
+    color:orangered;
+}
+
+.like {
+    color: #828282;
+    padding-left: 100px;
+    font-size: 15px;
+    font-style: italic;
+    float: top;   
+}
+
+.dislike {
+    color: #828282;
+    padding-left: 50px;
+    font-size: 15px;
+    font-style: italic;
+    float: top;   
+}
+
+.like-dislike {
+    line-height: 35px;
+}
+
+
+.favorits-link {
+    font-weight: bold;
+    color: #99cc00;
+}
+
+.signup-link {
+    color: white !important;
+    font-weight: bold;
+    font-size: large;
+}
+
+

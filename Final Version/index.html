@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html class="ui-mobile">
+    <head>
+        <title>neighborhoods</title>
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <!-- neighborhoods styling sheet -->
+        <link rel="stylesheet" href="css/neighborhoods-css.css">
+        
+        <!-- FontAwesome - http://fortawesome.github.io/Font-Awesome/ -->
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+
+        <!-- jQueryMobileCSS - original without styling -->
+        <link rel="stylesheet" href="css/jquerymobile.css">
+
+        <!-- nativeDroid core CSS -->
+        <link rel="stylesheet" href="css/jquerymobile.nativedroid.css">
+
+        <!-- nativeDroid: Light/Dark -->
+        <link rel="stylesheet" href="css/jquerymobile.nativedroid.light.css" id="jQMnDTheme">
+
+        <!-- nativeDroid: Color Schemes -->
+        <link rel="stylesheet" href="css/jquerymobile.nativedroid.color.green.css" id="jQMnDColor">
+        <!-- jQuery / jQueryMobile Scripts -->
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+    </head>
+    
+        <!-- sign in page -->
+        <section data-role="page" id="sign-in" class="ui-page ui-body-b">
+
+                <form autocomplete="on" class="signin-forms ui-input-text">
+                    <div class="form-background">
+                        <input type="email" id="signin-username" placeholder="someone@example.com" autofocus/>
+                        <div id="signin-username-error"></div>
+                        <br/>
+                    </div><br/>
+                    <div class="form-background">
+                        <input type="password" id="signin-password" placeholder="password" />
+                        <div id="signin-password-error" class="err-msg"></div>
+                    </div><br/>
+                    <input type="button" value="sign-in" id="signin-button" onclick="validateSignin()" />
+            </form><br/><br/><br/><br/><br/><br/>
+            <br/>
+            <div align="center"><a href="#signup" class="signup-link">No account? sign-up!</a></div>
+        </section>
+        
+        <!-- sign up page -->
+        <section data-role="page" id="signup" class="ui-page ui-body-b">
+            <h1 class="sign-up-header">Welcome to neighborhoods!</h1>
+            <!-- Page starts here -->
+            <div data-role="content">
+                <form class="ui-input-text" method="post">
+                    <ul class="ui-listview">                        
+                        <li data-role="list-divider" class="ui-li ui-li-divider ui-bar-b ui-first-child sign-up-text">please follow this short registration</li>                        
+                        <li data-role="fieldcontain" class="ui-field-contain ui-body ui-li ui-li-static ui-btn-up-b">
+                            <label class="ui-input-text">your email</label>                            
+                            <input type="text" name="email" id="signup-email" placeholder="somebody@example.com">
+                            <div id="signup-email-error" class="err-msg"></div>
+                        </li>
+                        <li data-role="fieldcontain" class="ui-field-contain ui-body ui-li ui-li-static ui-btn-up-b">
+                            <label class="ui-input-text">choose a password</label>                            
+                            <input type="password" name="pass" id="signup-pass" placeholder="password">
+                        </li>
+                        <li data-role="fieldcontain" class="ui-field-contain ui-body ui-li ui-li-static ui-btn-up-b">
+                            <label class="ui-input-text">re-enter your password</label>                            
+                            <input type="password" name="val-pass" id="signup-val-pass" placeholder="password">
+                            <div id="signup-password-error" class="err-msg"></div>
+                        </li>
+                        <li data-role="fieldcontain" class="ui-field-contain ui-body ui-li ui-li-static ui-btn-up-b">
+                            <label class="ui-input-text">name</label>                            
+                            <input type="text" name="name" id="signup-name">
+                            <div id="signup-name-error" class="err-msg"></div>
+                        </li>
+                        <li data-role="fieldcontain" class="ui-field-contain ui-body ui-li ui-li-static ui-btn-up-b">
+                            <label class="ui-input-text">birth date</label>                            
+                            <input type="date" name="birthdate" id="signup-birthdate">
+                            <div id="signup-birthdate-error" class="err-msg"></div>
+                        </li>
+                    </ul>
+                    <input type="button" value="create account" onclick="validateSignUp();">
+                    <input type="button" value="already have account" onclick="haveAccount();">
+                </form>
+            </div>
+        </section>
+        
+        <!-- main page -->
+        <section data-role="page" id="index" data-theme="b" data-url="index.html" tabindex="0" class="ui-page ui-body-b ui-page-header-fixed section-style"> 
+            <!-- Header starts here! -->
+            <header data-role="header" data-id="main-header" id="source-header" data-position="fixed" data-tap-toggle="false" data-theme="b" class="ui-header ui-bar-b ui-header-fixed slidedown" role="banner">
+                <h1 class="ui-title" role="heading" aria-level="1">neighborhoods</h1>
+                <a href="#index" data-ajax="false" class="ui-btn-left ui-btn ui-shadow ui-btn-corner-all ui-btn-up-b" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="b"><span class="ui-btn-inner"><span class="ui-btn-text"><i class="icon-home"></i></span></span></a>
+                <div id="back_button" onclick="history.back();" class="ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-b" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="b"><span class="ui-btn-inner"><span class="ui-btn-text"><i class="icon-arrow-left"></i></span></span></div>
+            </header>
+
+            <!-- User info -->
+            <div data-role="content" id="user_details">
+                <img src="images/img_prof.jpg" class="user-picture" alt="Profile Image"/>
+                <h1 class="user-name">Yonatan Karp</h1><br><br><br>
+            </div>
+            <!-- New Posts -->
+            <div id="new_posts">
+                <ul data-role="listview" data-inset="false" data-icon="false" data-divider-theme="b" class="ui-listview">
+                    <li data-role="list-divider" class="ui-li ui-li-divider ui-bar-b ui-li-has-count ui-first-child">
+                        <span id="new-post-header" class="ui-li-count ui-btn-up-b ui-btn-corner-all">New Posts</span>
+                    </li>
+                    <li class="ui-btn-active">
+                        <a href="#post001" class="posts-info"><img src="images/post-icon.png" alt="" class="post-icon">
+                            Metallica - Master of puppets
+                        </a>
+                        <div class="user-link">by:&nbsp;
+                            <a href="#friend-profile-1">Israel Elmekies</a>
+                        </div>
+                        <br>
+                        <div class="like-dislike">
+                            <span class="like" id="1L">
+                                <i class="icon-thumbs-up" onclick="like(1);">&nbsp;</i>
+                                (<span id="1LikeAmount">0</span>)    
+                            </span>
+                            <span class="dislike" id="1D">
+                                <i class="icon-thumbs-down" onclick="dislike(1);">&nbsp;</i>
+                                (<span id="1DislikeAmount">1</span>)    
+                            </span>
+                        </div>                            
+                    </li>
+                    <li class="ui-btn-active">
+                        <a href="#post002"><img src="images/post-icon.png" alt="" class="post-icon">
+                            Orphaned Land - Mabool
+                        </a>
+                        <div class="user-link">by:&nbsp;
+                            <a href="#profile">Yonatan Karp</a>
+                        </div>                   
+                        <br>
+                        <div class="like-dislike">
+                            <span class="like" id="2L">
+                                <i class="icon-thumbs-up" onclick="like(2);">&nbsp;</i>
+                                (<span id="2LikeAmount">4</span>)
+                            </span>
+                            <span class="dislike" id="2D">
+                                <i class="icon-thumbs-down" onclick="dislike(2);">&nbsp;</i>
+                                (<span id="2DislikeAmount">13</span>)    
+                            </span>
+                        </div> 
+                    </li>
+                    <li class="ui-btn-active">
+                        <a href="#post003"><img src="images/post-icon.png" alt="" class="post-icon">
+                            OMG I love britney spears! &lt;3
+                        </a>
+                        <div class="user-link">by:&nbsp;
+                            <a href="#friend-profile-2">Yuval Bar Zik</a>
+                        </div>
+                        <br>
+                        <div class="like-dislike">
+                            <span class="like" id="3L">
+                                <i class="icon-thumbs-up" onclick="like(3);">&nbsp;</i>
+                                (<span id="3LikeAmount">3</span>)    
+                            </span>
+                            <span class="dislike" id="3D">
+                                <i class="icon-thumbs-down" onclick="dislike(3);">&nbsp;</i>
+                                (<span id="3DislikeAmount">23</span>)    
+                            </span>
+                        </div>   
+                    </li>
+                    <li class="ui-btn-active">
+                        <a href="#post004"><img src="images/post-icon.png" alt="" class="post-icon">
+                            lonely island new album is great!
+                        </a>
+                        <div class="user-link">by:&nbsp;
+                            <a href="#profile">Yonatan Karp</a>
+                        </div>                   
+                        <br>
+                        <div class="like-dislike">
+                            <span class="like" id="4L">
+                                <i class="icon-thumbs-up" onclick="like(4);">&nbsp;</i>
+                                (<span id="4LikeAmount">43</span>)    
+                            </span>
+                            <span class="dislike" id="4D">
+                                <i class="icon-thumbs-down" onclick="dislike(4);">&nbsp;</i>
+                                (<span id="4DislikeAmount">0</span>)    
+                            </span>
+                        </div> 
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Footer starts here! -->
+            <footer data-role="footer" data-id="main-footer" id="source-footer" data-position="fixed" data-tap-toggle="false" data-theme="b" class="ui-footer ui-bar-b ui-footer-fixed slideup" role="contentinfo">
+                <div data-role="navbar" class="ui-navbar ui-mini" role="navigation">
+                    <ul class="ui-grid-b">
+                        <li class="ui-block-a">
+                            <a href="#add-post" data-icon="edit-sign" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-iconpos="top" data-theme="b" data-inline="true" class="ui-btn ui-btn-active ui-btn-up-b ui-btn-inline ui-btn-icon-top"></a>
+                        </li>
+                        <li class="ui-block-b">
+                            <a href="#messages" data-icon="envelope" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-iconpos="top" data-theme="b" data-inline="true" class="ui-btn ui-btn-up-b ui-btn-inline ui-btn-icon-top"></a>
+                        </li>
+                        <li class="ui-block-c">
+                            <a href="#profile" data-icon="user" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-iconpos="top" data-theme="b" data-inline="true" class="ui-btn ui-btn-inline ui-btn-icon-top ui-btn-hover-b"></a>
+                        </li>
+                        <li class="ui-block-d">
+                            <a href="#settings" data-icon="cogs" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-iconpos="top" data-theme="b" data-inline="true" class="ui-btn ui-btn-inline ui-btn-icon-top ui-btn-hover-b"></a>
+                        </li>
+                    </ul>
+                </div>
+            </footer>
+        </section>
+
+        <!-- Settings Page -->
+        <section data-role="page" id="settings" class="ui-page ui-body-b"> 
+            <!-- Header starts here! -->
+            <header data-role="header" data-id="main-header" data-position="fixed" data-tap-toggle="false" data-theme="b" class="ui-header ui-bar-b ui-header-fixed slidedown" role="banner"></header>
+
+            <div data-role="content">
+                <form class="ui-input-text">
+                    <ul class="ui-listview">                        
+                        <li data-role="list-divider" class="ui-li ui-li-divider ui-bar-b ui-first-child">Settings</li>                        
+                        <li data-role="fieldcontain" class="ui-field-contain ui-body ui-li ui-li-static ui-btn-up-b">
+                            <label class="ui-slider">Change Name</label>
+                            <input type="text" name="name" id="settings-name">
+                            <div id="settings-name-error" class="err-msg"></div>
+                        </li>
+                        <li data-role="fieldcontain" class="ui-field-contain ui-body ui-li ui-li-static ui-btn-up-b">
+                            <label class="ui-slider">Change Age</label>
+                            <input type="date" name="age" id="settings-age">
+                            <div id="settings-age-error" class="err-msg"></div>
+                        </li>
+                        <li data-role="fieldcontain" class="ui-field-contain ui-body ui-li ui-li-static ui-btn-up-b">
+                            <label class="ui-slider">Change Hometown</label>
+                            <input type="text" name="hometown">
+                        </li>                        
+                        <li data-role="fieldcontain" class="ui-field-contain ui-body ui-li ui-li-static ui-btn-up-b">
+                            <label class="ui-slider">About Yourself</label>
+                            <textarea name="hometown"></textarea>
+                        </li>
+                        <li data-role="fieldcontain" class="ui-field-contain ui-body ui-li ui-li-static ui-btn-up-b">
+                            <label class="ui-slider">Change Profile Image</label>
+                            <input type="file" accept="image/*" capture="camera" />
+                        </li>
+                        <li data-role="fieldcontain" class="ui-field-contain ui-body ui-li ui-li-static ui-btn-up-b">
+                            <label for="acceptMessages">Accept Messages? </label>
+                                <select name="acceptMessages" id="acceptMessages" data-role="slider" data-theme="b">
+                                    <option value="off">No</option>
+                                    <option value="on">Yes</option>
+                                </select>
+                        </li>
+                        <li data-role="fieldcontain" class="ui-field-contain ui-body ui-li ui-li-static ui-btn-up-b">
+                            <label for="showFriends">Show Friends List?</label>
+                                <select name="showFriends" id="showFriends" data-role="slider">
+                                    <option value="off">No</option>
+                                    <option value="on">Yes</option>
+                                </select>
+                        </li>
+                        <li data-role="fieldcontain" class="ui-field-contain ui-body ui-li ui-li-static ui-btn-up-b">
+                            <label for="showPosts">Show Favorite Posts?</label>
+                                <select name="showPosts" id="showPosts" data-role="slider">
+                                    <option value="off">No</option>
+                                    <option value="on">Yes</option>
+                                </select>
+                        </li>
+                        <li data-role="fieldcontain" class="ui-field-contain ui-body ui-li ui-li-static ui-btn-up-b">
+                        <label for="slider2b">Radius (in km): </label>
+                        <input type="range" name="slider2" id="slider2b" value="0" min="1" max="12" data-highlight="true">
+                    </li>
+
+                    </ul>
+                    <input type="button" value="Apply settings" onclick="validateSettings();">
+                </form>
+                <form name="logout" action="">
+                    <input type="button" value="signout" onclick="signout()">
+                </form>
+
+            </div>
+            
+            <!-- Footer starts here! -->
+            <footer data-role="footer" data-position="fixed" data-tap-toggle="false" data-theme="b" class="ui-footer ui-bar-b ui-footer-fixed slideup" role="contentinfo" data-id="main-footer"></footer>
+        </section>
+
+        <!-- Add Post Page -->
+        <section data-role="page" id="add-post" class="ui-page ui-body-b"> 
+            <!-- Header starts here! -->
+            <div data-role="header" id="source-header" data-id="main-header" data-position="fixed" data-tap-toggle="false" data-theme="b" class="ui-header ui-bar-b ui-header-fixed slidedown" role="banner"></div>
+
+            <!-- Page starts here -->
+            <div data-role="content">
+                <form class="ui-input-text">
+                    <ul class="ui-listview">                        
+                        <li data-role="list-divider" class="ui-li ui-li-divider ui-bar-b ui-first-child">
+                            Add a Post
+                        </li>                        
+                        <li data-role="fieldcontain" class="ui-field-contain ui-body ui-li ui-li-static ui-btn-up-b">
+                            <input type="text" name="title" placeholder="Title" id="add-post-title">
+                            <div id="add-post-title-error" class="err-msg"></div>
+                        </li>
+                        <li data-role="fieldcontain" class="ui-field-contain ui-body ui-li ui-li-static ui-btn-up-b">
+                            <input type="text" name="artist" placeholder="Artist" id="add-post-artist">
+                            <div id="add-post-artist-error" class="err-msg"></div>
+                        </li>
+                        <li data-role="fieldcontain" class="ui-field-contain ui-body ui-li ui-li-static ui-btn-up-b">
+                            <input type="text" name="album-song" placeholder="Album \ Song" id="add-post-album_song">
+                            <div id="add-post-album_song-error" class="err-msg"></div>
+                        </li>
+                        <li data-role="fieldcontain" class="ui-field-contain ui-body ui-li ui-li-static ui-btn-up-b">
+                            <textarea class="ui-input-text" cols="70" rows="68" name="content" placeholder="Write here..." id="add-post-content"></textarea>
+                            <div id="add-post-content-error" class="err-msg"></div>
+                        </li>
+                        <li data-role="fieldcontain" class="ui-field-contain ui-body ui-li ui-li-static ui-btn-up-b">
+                            <label for="add-post-genre" class="ui-select">Select genre</label>
+                            <div class="ui-select">
+                                <div data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-icon="arrow-d" data-iconpos="right" data-theme="b" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-right ui-focus ui-btn-hover-b">
+                                    <select name="select-choice-1" id="add-post-genre" data-native-menu="true">
+                                        <option value="Default">Default</option>
+                                        <option value="Rock">Rock</option>
+                                        <option value="Pop">Pop</option>
+                                        <option value="Folk">Folk</option>
+                                        <option value="Electronic">Electronic</option>
+                                        <option value="Hip-Hop">Hip-Hop</option>
+                                        <option value="Rap">Rap</option>
+                                        <option value="R&amp;B">R&amp;B</option>
+                                        <option value="Soul">Soul</option>
+                                        <option value="Jazz">Jazz</option>
+                                        <option value="Blues">Blues</option>
+                                        <option value="Country">Country</option>
+                                        <option value="Alternative">Alternative</option>
+                                        <option value="Metal">Metal</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div id="add-post-genre-error" class="err-msg"></div>
+                        </li>
+                    </ul>
+                    <input type="button" value="share!" onclick="validateNewPost()">
+                </form>
+
+            </div>
+
+            <!-- Footer starts here! -->
+            <div data-role="footer" data-id="main-footer" data-position="fixed" data-tap-toggle="false" data-theme="b" class="ui-footer ui-bar-b ui-footer-fixed slideup" role="contentinfo"></div>
+        </section>
+
+        <!-- View-Messages Page -->
+        <section data-role="page" id="messages" class="ui-page ui-body-b"> 
+            <!-- Header starts here! -->
+            <div data-role="header" id="source-header" data-id="main-header" data-position="fixed" data-tap-toggle="false" data-theme="b" class="ui-header ui-bar-b ui-header-fixed slidedown" role="banner"></div>
+            <div id="new_posts">
+                <ul data-role="listview" data-inset="false" data-icon="false" data-divider-theme="b" class="ui-listview">
+                    <li class="ui-btn-active ui-btn-icon-left">
+                        <a href="#send-message" data-icon="envelope" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-iconpos="top" data-theme="b" data-inline="true" class="ui-btn ui-btn-inline ui-btn-icon-top">
+                            <div id="send-private-message">Write a new message</div>
+                        </a> 
+                    </li>
+                    <li data-role="list-divider" class="ui-li ui-li-divider ui-bar-b ui-first-child">
+                    </li>
+                    <li data-role="list-divider" class="ui-li ui-li-divider ui-bar-b ui-first-child">
+                        All messages
+                    </li>                   
+                    <li class="ui-btn-active ui-btn-icon-left">
+                        <a href="#demo-message001" class="ui-btn-inner ui-li">
+                        <p class="ui-li-aside ui-li-desc message-date"><strong>Jan 4,&nbsp;</strong>2014</p>                        
+                        <div class="message-sender">
+                            from: Israel Elmekies
+                        </div>
+                        <div class="message-content">
+                            baby whale
+                            <br/><br/><br/>
+                        </div>
+                        </a>
+                    </li>
+            </div>
+            <div data-role="footer" data-id="main-footer" data-position="fixed" data-tap-toggle="false" data-theme="b" class="ui-footer ui-bar-b ui-footer-fixed slideup" role="contentinfo"></div>        
+        </section>
+        
+        <!-- Send Message Page -->
+        <section data-role="page" id="send-message" class="ui-page ui-body-b"> 
+            <!-- Header starts here! -->
+            <div data-role="header" id="source-header" data-id="main-header" data-position="fixed" data-tap-toggle="false" data-theme="b" class="ui-header ui-bar-b ui-header-fixed slidedown" role="banner"></div>
+            
+            <div data-role="content">
+                <form class="ui-input-text">
+                    <ul class="ui-listview">                        
+                        <li data-role="list-divider" class="ui-li ui-li-divider ui-bar-b ui-first-child">
+                            Write a Message
+                        </li>                        
+                        <li data-role="fieldcontain" class="ui-field-contain ui-body ui-li ui-li-static ui-btn-up-b">
+                            <input type="text" id="send-message-to" placeholder="To" value="">
+                            <div id="send-message-to-err" class="err-msg"></div>
+                        </li>
+                        <li data-role="fieldcontain" class="ui-field-contain ui-body ui-li ui-li-static ui-btn-up-b">
+                            <input type="text" id="send-message-subject" placeholder="Subject">
+                            <div id="send-message-subject-err" class="err-msg"></div>
+                        </li>
+                        <li data-role="fieldcontain" class="ui-field-contain ui-body ui-li ui-li-static ui-btn-up-b">
+                            <textarea id="send-message-content" cols="170" rows="168"  placeholder="Write here..."></textarea>
+                            <div id="send-message-content-err" class="err-msg"></div>
+                        </li>
+                    </ul>
+                    <input type="button" value="send message!" onclick="validateMessage()">
+                </form>
+            </div>
+            
+            
+            <div data-role="footer" data-id="main-footer" data-position="fixed" data-tap-toggle="false" data-theme="b" class="ui-footer ui-bar-b ui-footer-fixed slideup" role="contentinfo"></div>        
+        </section>
+
+        <!-- Profile Page -->
+        <section data-role="page" id="profile" class="ui-page ui-body-b"> 
+            <!-- Header starts here! -->
+            <div data-role="header" id="source-header" data-id="main-header" data-position="fixed" data-tap-toggle="false" data-theme="b" class="ui-header ui-bar-b ui-header-fixed slidedown" role="banner"></div>
+
+            <!-- User info -->
+            <div data-role="content" id="user_details">
+                <img src="images/img_prof.jpg" class="user-picture" alt="Profile Image"/>
+                <h1 class="user-name">Yonatan Karp</h1><br><br><br>
+            </div>
+            <div data-role='collapsible' data-content-theme='b'>
+                <h4>Your Friends</h4>
+                <div>
+                    <ul data-role="listview" class="ui-listview">
+                        <li class="ui-btn-active">
+                            <a href="#friend-profile-1">
+                                Israel Elmekies
+                            </a>                  
+                        </li>
+                        <li class="ui-btn-active">
+                            <a href="#friend-profile-2">
+                                Yuval Bar-Zik
+                            </a>                  
+                        </li> 
+                    </ul>
+                </div>
+            </div>
+            <div data-role='collapsible' data-content-theme='b'>
+                <h4>Your Posts</h4>
+                <div>   
+                <ul data-role="listview" class="ui-listview">
+                        <li class="ui-btn-active">
+                            <a href="#post002"><img src="images/post-icon.png" alt="" class="post-icon">
+                                Orphaned Land - Mabool
+                            </a>
+                            <div class="user-link">by:&nbsp;
+                                <a href="#profile">Yonatan Karp</a>
+                            </div>                    
+                        </li>
+                        <li class="ui-btn-active">
+                            <a href="#post002"><img src="images/post-icon.png" alt="" class="post-icon">
+                                lonely island new album is great!
+                            </a>
+                            <div class="user-link">by:&nbsp;
+                                <a href="#profile">Yonatan Karp</a>
+                            </div>                    
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div data-role='collapsible' data-content-theme='b'>
+                <h4>Your Favorites</h4>
+                <div>
+                    <ul data-role="listview" class="ui-listview">
+                        <li class="ui-btn-active">
+                            <a href="#post003"><img src="images/post-icon.png" alt="" class="post-icon">
+                                OMG I love britney spears! &lt;3
+                            </a>
+                            <div class="user-link">by:&nbsp;
+                                <a href="#friend-profile-2">Yuval Bar Zik</a>
+                            </div>
+                        </li>                
+                    </ul>
+                </div>
+            </div>
+            <div data-role="footer" data-id="main-footer" data-position="fixed" data-tap-toggle="false" data-theme="b" class="ui-footer ui-bar-b ui-footer-fixed slideup" role="contentinfo"></div>        
+        </section>      
+
+        <!-- Friend Profile 1 -->
+        <section data-role="page" id="friend-profile-1" class="ui-page ui-body-b"> 
+            <!-- Header starts here! -->
+            <div data-role="header" id="source-header" data-id="main-header" data-position="fixed" data-tap-toggle="false" data-theme="b" class="ui-header ui-bar-b ui-header-fixed slidedown" role="banner"></div>
+
+            <!-- User info -->
+            <div data-role="content" id="user_details">
+                <img src="images/img-friend001.jpg" class="user-picture" alt="Profile Image"/>
+                <h1 class="user-name">Israel Elmekies</h1><br><br><br>
+            </div>      
+
+            <div data-role='collapsible' data-content-theme='b'>
+                <h4>About Israel</h4>
+                <div class='user-about'>
+                    <p><strong>Age:</strong> 27 </p>
+                    <p><strong>Hometown:</strong> Afula</p>
+                    <p><strong>Distance</strong> 124.3km </p>
+                    <p><strong>Favorite Genres:</strong> Folk, Rock, Electronic, Metal, Jazz, Blues</p>
+                    <p><strong>Number of Posts:</strong> 15</p>
+                </div>
+            </div>            
+            <div data-role='collapsible' data-content-theme='b'>
+                <h4>Israel's Friends</h4>
+                <div>
+                    <ul data-role="listview" class="ui-listview">
+                        <li class="ui-btn-active">
+                            <a href="#profile">
+                                Yonatan Karp
+                            </a>                  
+                        </li>
+                        <li class="ui-btn-active">
+                            <a href="#friend-profile-2">
+                                Yuval Bar-Zik
+                            </a>                  
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div data-role='collapsible' data-content-theme='b'>
+                <h4>Israel's Posts</h4>
+                <div>
+                    <ul data-role="listview" class="ui-listview">
+                        <li class="ui-btn-active">
+                            <a href="#post002"><img src="images/post-icon.png" alt="" class="post-icon">
+                                Metallica - Master of Puppets
+                            </a>
+                            <div class="user-link">by:&nbsp;
+                                <a href="#user-page">Israel Elmekies</a>
+                            </div>                    
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+            <div data-role='collapsible' data-content-theme='b'>
+                <h4>Israel's Favorites</h4>
+                <div>
+                    <ul data-role="listview" class="ui-listview">
+                        <li class="ui-btn-active">
+                            <a href="#post002"><img src="images/post-icon.png" alt="" class="post-icon">
+                                Orphaned Land - Mabool
+                            </a>
+                            <div class="user-link">by:&nbsp;
+                                <a href="#user-page">Yonatan Karp</a>
+                            </div>                    
+                        </li>
+                        <li class="ui-btn-active">
+                            <a href="#post003"><img src="images/post-icon.png" alt="" class="post-icon">
+                                OMG I love britney spears! &lt;3
+                            </a>
+                            <div class="user-link">by:&nbsp;
+                                <a href="#user-page">Yuval Bar Zik</a>
+                            </div>
+                        </li>                        
+                    </ul>
+                </div>
+            </div>
+
+            <form class="ui-input-text">
+                <input type="button" value="send Israel a message" onclick="writeMessage('Isreal Elmekies')">
+                <input type="button" value="unfriend Israel" onclick="unfriend()">
+            </form>
+
+
+            <div data-role="footer" data-id="main-footer" data-position="fixed" data-tap-toggle="false" data-theme="b" class="ui-footer ui-bar-b ui-footer-fixed slideup" role="contentinfo"></div>        
+        </section>             
+
+        <!-- Friend Profile 2 -->
+        <section data-role="page" id="friend-profile-2" class="ui-page ui-body-b"> 
+            <!-- Header starts here! -->
+            <div data-role="header" id="source-header" data-id="main-header" data-position="fixed" data-tap-toggle="false" data-theme="b" class="ui-header ui-bar-b ui-header-fixed slidedown" role="banner"></div>
+
+            <!-- User info -->
+            <div data-role="content" id="user_details">
+                <img src="images/img-friend002.jpg" class="user-picture" alt="Profile Image"/>
+                <h1 class="user-name">Yuval Bar-Zik</h1><br><br><br>
+            </div>      
+
+            <div data-role='collapsible' data-content-theme='b'>
+                <h4>About Yuval</h4>
+                <div class='user-about'>
+                    <p><strong>Age:</strong> 25 </p>
+                    <p><strong>Hometown:</strong> Raanana</p>
+                    <p><strong>Distance</strong> 13.9km </p>
+                    <p><strong>Favorite Genres:</strong> Rock, Electronic, Metal, Israeli</p>
+                    <p><strong>Number of Posts:</strong> 5 </p>
+                </div>
+            </div>            
+            <div data-role='collapsible' data-content-theme='b'>
+                <h4>
+                    Yuval's Friends</h4>
+                <div>
+                    <ul data-role="listview" class="ui-listview">
+                        <li class="ui-btn-active">
+                            <a href="#profile">
+                                Yonatan Karp
+                            </a>                  
+                        </li>
+                        <li class="ui-btn-active" id="israel-profile">
+                            <a href="#friend-profile-1">
+                                Israel Elmekies
+                            </a>                  
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div data-role='collapsible' data-content-theme='b'>
+                <h4>Yuval's Posts</h4>
+               <div>
+                    <ul data-role="listview" class="ui-listview">
+                        <li class="ui-btn-active">
+                            <a href="#post002"><img src="images/post-icon.png" alt="" class="post-icon">
+                                OMG I love britney spears! <3
+                            </a>
+                            <div class="user-link">by:&nbsp;
+                                <a href="#user-page">Yuval Bar-Zik  </a>
+                            </div>                    
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div data-role='collapsible' data-content-theme='b'>
+                <h4>Yuval's Favorites</h4>
+                <div>
+                    <ul data-role="listview" class="ui-listview">
+                        <li class="ui-btn-active">
+                            <a href="#post002"><img src="images/post-icon.png" alt="" class="post-icon">
+                                Orphaned Land - Mabool
+                            </a>
+                            <div class="user-link">by:&nbsp;
+                                <a href="#profile">Yonatan Karp</a>
+                            </div>                    
+                        </li>
+                        <li class="ui-btn-active">
+                            <a href="#post003"><img src="images/post-icon.png" alt="" class="post-icon">
+                                OMG I love britney spears! &lt;3
+                            </a>
+                            <div class="user-link">by:&nbsp;
+                                <a href="#user-page">Yuval Bar Zik</a>
+                            </div>
+                        </li>                        
+                    </ul>
+                </div>
+            </div>
+
+            <form class="ui-input-text">
+                <input type="button" value="send Yuval a message" onclick="writeMessage()">
+                <input type="button" value="unfriend Yuval" onclick="unfriend()">
+            </form>
+
+
+            <div data-role="footer" data-id="main-footer" data-position="fixed" data-tap-toggle="false" data-theme="b" class="ui-footer ui-bar-b ui-footer-fixed slideup" role="contentinfo"></div>        
+        </section>
+        
+        <!-- 1st demo post Page -->
+        <section data-role="page" id="post001" class="ui-page ui-body-b"> 
+            <!-- Header starts here! -->
+            <header data-role="header" data-id="main-header" data-position="fixed" data-tap-toggle="false" data-theme="b" class="ui-header ui-bar-b ui-header-fixed slidedown" role="banner"></header>
+
+            <!-- Post Body -->
+            <div data-role="content">
+                <div class="post-subject">Metallica - Master of Puppets</div>
+                <div class="post-author">Author : <a href="#friend-profile-1">Israel Elmekies</a></div>
+                <div class="post-artist">Artist : Metallica</div>
+                <div class="post-album_song">Album / Song : Master of puppets</div>
+                <div class="post-genre">Genre : Metal</div>
+                <div class="post-content">
+                    Everyone views this album as a classic, that's unquestionable. What is, however, is the song order. While both The Thing That Should Not Be and Welcome Home (Sanitarium) are great songs, having them back to back drags the momentum of the album down. This is also true with Ride the Lightning in regards to For Whom the Bell Tolls and Fade to Black which share the same spot in the song order. Both albums are dragged down by this, and Master of Puppets, albeit still a classic, is Ride the Lightning by numbers with the only deviation being the instrumentals.<br/>
+                    While Ride the Lightning's track order works, sorta like a roller coaster of thrash metal, Master of Puppets seems to try to fit the same formula to the detriment of the order the tracks want to be. The album still works, but I feel sort of an Italian vibe from the album, though I'm not entirely sure why. Fight Fire with Fire and Battery both start with a clean or acoustic intro, followed by fast 16th note thrashing, followed by the title tracks, which both feature Hetfield's awesome ability to downpick just about anything at a quick tempo. After that comes the slow, but heavy as fuck song, followed by the soft "ballad-y" type song. And that's not to say that Master of Puppets as a whole doesn't work at all, but song order having similar songs in almost the same order kinda makes it seem like more of the same. That said, though, Master of Puppets is a tad more sophisticated, technical, and mature, so it's not a total loss.<br/>
+                    All said, James and Kirk are great throughout the record. James really brings the heaviness and Kirk accentuates it greatly with his leads, fills, and overdubs. Rhythmically, the best song is either Battery or Master of Puppets, depending on your personal taste and/or mood during your listen-through of the album. The best Kirk solo is Battery or Damage, Inc. He "says" more with the Damage, Inc. solo, but burns up the fretboard with the Battery solo. Unfortunately, Cliff Burton is almost non-existent. This is a shame as you can tell how great of an asset he was to Metallica as far as writing goes and in the bad mix, because his bass parts in live bootlegs are incredible. In the mix of the album, he plays more of a "thickening" role, as bass isn't too out front. Though not as clear as some other albums like David Ellefson's parts on Megadeth's Countdown to Extinction [not to compare bands, but rather mixes of said albums], he's definitely there unlike Newsted on AJFA, and if you really focus your ears on his parts, you can make them out, so they aren't totally buried, muddy, or non-existent. Lars for the most part does his best playing here. This was his peak and wasn't ever quite as good or focused. Some will argue that his parts on AJFA were better and that maybe so in some songs, but his drum sound isn't quite as good.<br/>
+                    In closing, definitely a classic, even if it is flawed in regards to Cliff's space being overpowered and the track order. It's required listening for any metalhead and if you claim to be a metalhead, but don't have this album or have at least listened to it numerous times, you might want to stop posing. Get it.<br/>
+                    Recommended tracks:<br/>Battery<br/>Master of Puppets<br/>Leper Messiah<br/>Damage Inc.<br/>
+                </div>
+                
+                <br/>
+                <div align="center" id="randID" class="favorits-link" onclick="addPostToFavorites(this);">add this post to your favorites</div>
+                <br/><br/>
+                <form class="ui-input-text">
+                    <ul class="ui-listview">
+                        <li data-role="list-divider" class="ui-li ui-li-divider ui-bar-b ui-first-child">
+                        </li>
+                        <li data-role="list-divider" class="ui-li ui-li-divider ui-bar-b ui-first-child">
+                            Write new comment
+                        </li>
+                        <li data-role="fieldcontain" class="ui-field-contain ui-body ui-li ui-li-static ui-btn-up-b">
+                            <input type="text" name="subject" placeholder="Subject">
+                        </li>
+                        <li data-role="fieldcontain" class="ui-field-contain ui-body ui-li ui-li-static ui-btn-up-b">
+                            <textarea id="send-message-textarea" cols="170" rows="168" name="content"></textarea>
+                        </li>
+                    </ul>
+                    <input type="button" value="Post new comment">
+                </form>
+                 <ul data-role="listview" data-inset="false" data-icon="false" data-divider-theme="b" class="ui-listview">
+                        <li data-role="list-divider" class="ui-li ui-li-divider ui-bar-b ui-first-child">
+                        </li>
+                        <li data-role="list-divider" class="ui-li ui-li-divider ui-bar-b ui-first-child">
+                            All comments
+                        </li>
+                     
+                     <li class="ui-btn-active ui-btn-icon-left">
+                        <p class="ui-li-aside ui-li-desc message-date"><strong>Apr 19,&nbsp;</strong>2014</p>                        
+                        <div class="message-sender">
+                            Yuval Bar-Zik
+                        </div>
+                        <div class="message-content">
+                            This album is great!!!!
+                        </div>
+                    </li>
+                    <li class="ui-btn-active ui-btn-icon-left">
+                        <p class="ui-li-aside ui-li-desc message-date"><strong>Apr 19,&nbsp;</strong>2014</p>                        
+                        <div class="message-sender">
+                            Yonatan Karp
+                        </div>
+                        <div class="message-content">
+                            I hate this album and this band!!!!
+                        </div>
+                    </li>
+                 </ul>
+            </div>
+
+            <!-- Footer starts here! -->
+            <footer data-role="footer" data-position="fixed" data-tap-toggle="false" data-theme="b" class="ui-footer ui-bar-b ui-footer-fixed slideup" role="contentinfo" data-id="main-footer"></footer>
+        </section>
+
+        <!-- 2nd demo post Page -->
+        <section data-role="page" id="post002" class="ui-page ui-body-b"> 
+            <!-- Header starts here! -->
+            <header data-role="header" data-id="main-header" data-position="fixed" data-tap-toggle="false" data-theme="b" class="ui-header ui-bar-b ui-header-fixed slidedown" role="banner"></header>
+
+            <!-- Post Body -->
+            <div>
+                <div class="post-subject">Mabool is a great album!</div>
+                <div class="post-author">Author : <a href="#profile">Yonatan Karp</a></div>
+                <div class="post-artist">Artist : Orphaned Land</div>
+                <div class="post-album_song">Album / Song : Mabool</div>
+                <div class="post-genre">Genre : Metal</div>
+                <div class="post-content">
+                    It took 8 years for 'Orphaned Land' to return after their mighty 'El Norra Alila' with this shiny produced album, this time way more influenced by progressive rock and a bit distant from their metal roots.<br/>
+                    The main problem of this album is the soft edge of the production. The keyboards increase different sounds and depth in 'Mabool', and that's a plus. However, the guitars have a really bad tone. It has a sound of a really cheap multi effect which producing some fragile distortion with extra middle frequencies. It causing the riffs to lose some necessary depth and often get lost in the mix, underneath the drums and vocals.<br/>
+                    Another problem, which is a quite serious one, is the presence of fillers between the good songs. I personally prefer 30 minutes length albums which are topnotch all the way then 60 minutes length albums which make you to press the skip button too much. There are some really brilliant songs here, take for example the opener 'Birth Of The Three'. It starts with a fluid melodic, oriental riff which repeats itself quite much each time with a slightly different touch and varying instruments behind it. The vocals are just incredible, varying from simply spoken texts to clean vocals, oriental chants and harsh growls, all delivering the exact feeling of the lyrics. 'The Kiss Of Babylon' and 'Halo Dies' are the heavier tracks of this album, with some quite heavy riffs and catchy guitar leads, espically 'Halo Dies' which is a real progressive masterpiece.<br/>
+                    However, there are too many weak tracks which just ruin the continuity of the good stuff.<br/>
+                    'A Call To Awake' is plain bad. It has an Iron Maiden worship guitar theme which sound dumb and repeat itself too much. The vocals just don't reach any peak and so is the riffing which trying to be power metalish but just fails. The ending of the song is just awkward, some pretty bad technical keyboards masturbation that goes absolutely no where. 'A'salk' is a shitty interlude with some flat female trilling vocals in Yemen language. 'The Calm Before The Flood' is a boring overlong ambient track, like these you can hear in elevators. 'The Storm Still Rages Inside' is one long irritating guitar solo that leads to 'Rainbow' which is a nice and calm clean guitar theme, but a bit overlong.<br/>
+                    Overall, the good songs of this album are really deep and worth listening, but there are just too many bad ideas here that could have been cut and make this album less frustrating. 'Mabool' has some really great material, it's just overlong and full with fillers. I do hope though, that their next album will be better, just like their old classics.
+                </div>   
+            </div>          
+                <br/>
+                <div align="center" id="randID2" class="favorits-link" onclick="addPostToFavorites(this);">add this post to your favorites</div>
+                <br/><br/>
+            <div>    
+                <form class="ui-input-text">
+                    <ul class="ui-listview">
+                        <li data-role="list-divider" class="ui-li ui-li-divider ui-bar-b ui-first-child">
+                        </li>
+                        <li data-role="list-divider" class="ui-li ui-li-divider ui-bar-b ui-first-child">
+                            Write new comment
+                        </li>
+                        <li data-role="fieldcontain" class="ui-field-contain ui-body ui-li ui-li-static ui-btn-up-b">
+                            <input type="text" name="subject" placeholder="Subject">
+                        </li>
+                        <li data-role="fieldcontain" class="ui-field-contain ui-body ui-li ui-li-static ui-btn-up-b">
+                            <textarea id="send-message-textarea" cols="170" rows="168" name="content"></textarea>
+                        </li>
+                    </ul>
+                    
+                    <input type="button" value="Post new comment">
+                </form>
+                 <ul data-role="listview" data-inset="false" data-icon="false" data-divider-theme="b" class="ui-listview">
+                        <li data-role="list-divider" class="ui-li ui-li-divider ui-bar-b ui-first-child">
+                        </li>
+                        <li data-role="list-divider" class="ui-li ui-li-divider ui-bar-b ui-first-child">
+                            All comments
+                        </li>
+                     
+                     <li class="ui-btn-active ui-btn-icon-left">
+                        <p class="ui-li-aside ui-li-desc message-date"><strong>Apr 19,&nbsp;</strong>2014</p>                        
+                        <div class="message-sender">
+                            Yuval Bar-Zik
+                        </div>
+                        <div class="message-content">
+                            This album is great!!!!
+                        </div>
+                    </li>
+                    <li class="ui-btn-active ui-btn-icon-left">
+                        <p class="ui-li-aside ui-li-desc message-date"><strong>Apr 19,&nbsp;</strong>2014</p>                        
+                        <div class="message-sender">
+                            Yonatan Karp
+                        </div>
+                        <div class="message-content">
+                            I hate this album and this band!!!!
+                        </div>
+                    </li>
+                 </ul>
+            </div>
+
+            <!-- Footer starts here! -->
+            <footer data-role="footer" data-position="fixed" data-tap-toggle="false" data-theme="b" class="ui-footer ui-bar-b ui-footer-fixed slideup" role="contentinfo" data-id="main-footer"></footer>
+        </section>
+
+        <!-- 3rd demo post Page -->
+        <section data-role="page" id="post003" class="ui-page ui-body-b"> 
+            <!-- Header starts here! -->
+            <header data-role="header" data-id="main-header" data-position="fixed" data-tap-toggle="false" data-theme="b" class="ui-header ui-bar-b ui-header-fixed slidedown" role="banner"></header>
+
+            <!-- Post Body -->
+            <div>
+                <div class="post-subject">OMG I love britney spears! &lt;3</div>
+                <div class="post-author">Author : <a href="#friend-profile-2">Yuval Bar-Zik</a></div>
+                <div class="post-artist">Artist : Britney Spears</div>
+                <div class="post-album_song">Album / Song : Oops  did it again</div>
+                <div class="post-genre">Genre : Pop</div>
+                <div class="post-content">
+                    Britney Spears carries on the classic archetype of the rock & roll teen queen, the dungaree doll, the angel baby who just has to make a scene. She has nothing to do with Lolita and everything to do with Ann-Margret's pink capri pants in Bye Bye Birdie. Buddy Holly called her Peggy Sue, Ricky Nelson called her Mary Lou, the Beach Boys called her Barbara Ann, and her boyfriend called her at Beechwood 4-5789. It's her party and she'll grind if she wants to. Shooting at the walls of heartache, bang bang, she is the warrior.<br/>
+                    Britney is a solo starlet working the girl-group shoop shoop, and if she's no Dusty Springfield yet, she's up there with Lesley Gore, Connie Francis and Claudine Clark. Oops! . . . I Did It Again is fantastic pop cheese, with much better song-factory hooks than 'N Sync or BSB get. The usual Swedish suspects provide sugary disco bombast along with guest producers Rodney Jerkins and Mutt Lange. In the terrific title hit, the music comes from Barbra Streisand's "Woman in Love," the words evoke Morrissey circa "I Started Something I Couldn't Finish," but that brutal growl is all Britney, articulating a violently ambivalent sexual confusion her audience can relate to, kicking and screaming for the right to figure out her desires before the world decides for her. She's in the dressing room, trying on various styles of adult sexuality that don't quite fit yet, and her fans know how that feels. As the Crystals used to sing, girls can tell.<br/>
+                    You can hear the same fury in her brilliant version of the Stones' "(I Can't Get No) Satisfaction" as she vandalizes the words ("how white my shirts could be" becomes "how tight my skirt should be" — perfect) and snarls in libidinal frustration. Let it bleed, Miss B: Clearly it's just a matter of time before Christina Aguilera strikes back with "Have You Seen Your Mother, Britney, Standing in the Shadow?," followed by Jessica Simpson's "Under My Thumb," Mandy Moore's "Ruby Tuesday" and the Backstreet Boys' "Back Street Girl." That's the great thing about Oops! - under the cheese surface, Britney's demand for satisfaction is complex, fierce and downright scary, making her a true child of rock & roll tradition.
+                </div>
+            </div>    
+            <br/>
+                <div align="center" id="randID3" class="favorits-link" onclick="addPostToFavorites(this);">add this post to your favorites</div>
+            <br/><br/>            
+           <div>
+                <form class="ui-input-text">
+                    <ul class="ui-listview">
+                        <li data-role="list-divider" class="ui-li ui-li-divider ui-bar-b ui-first-child">
+                        </li>
+                        <li data-role="list-divider" class="ui-li ui-li-divider ui-bar-b ui-first-child">
+                            Write new comment
+                        </li>
+                        <li data-role="fieldcontain" class="ui-field-contain ui-body ui-li ui-li-static ui-btn-up-b">
+                            <input type="text" name="subject" placeholder="Subject">
+                        </li>
+                        <li data-role="fieldcontain" class="ui-field-contain ui-body ui-li ui-li-static ui-btn-up-b">
+                            <textarea id="send-message-textarea" cols="170" rows="168" name="content"></textarea>
+                        </li>
+                    </ul>
+                    <input type="button" value="Post new comment">
+                </form>
+                 <ul data-role="listview" data-inset="false" data-icon="false" data-divider-theme="b" class="ui-listview">
+                        <li data-role="list-divider" class="ui-li ui-li-divider ui-bar-b ui-first-child">
+                        </li>
+                        <li data-role="list-divider" class="ui-li ui-li-divider ui-bar-b ui-first-child">
+                            All comments
+                        </li>
+                                             <li class="ui-btn-active ui-btn-icon-left">
+                        <p class="ui-li-aside ui-li-desc message-date"><strong>Apr 19,&nbsp;</strong>2014</p>                        
+                        <div class="message-sender">
+                            Israel Elmekies
+                        </div>
+                        <div class="message-content">
+                          WOW!
+                        </div>
+                    </li>
+                    <li class="ui-btn-active ui-btn-icon-left">
+                        <p class="ui-li-aside ui-li-desc message-date"><strong>Apr 19,&nbsp;</strong>2014</p>                        
+                        <div class="message-sender">
+                            Yonatan Karp
+                        </div>
+                        <div class="message-content">
+                            I love you spears!
+                        </div>
+                    </li>
+                 </ul>
+            <!-- Footer starts here! -->
+            <footer data-role="footer" data-position="fixed" data-tap-toggle="false" data-theme="b" class="ui-footer ui-bar-b ui-footer-fixed slideup" role="contentinfo" data-id="main-footer"></footer>
+        </section>
+
+        <!-- 4th demo post Page -->
+        <section data-role="page" id="post004" class="ui-page ui-body-b"> 
+            <!-- Header starts here! -->
+            <header data-role="header" data-id="main-header" data-position="fixed" data-tap-toggle="false" data-theme="b" class="ui-header ui-bar-b ui-header-fixed slidedown" role="banner"></header>
+
+            <!-- Post Body -->
+            <div>
+                <div class="post-subject">lonely island new album is great!</div>
+                <div class="post-author">Author : <a href="#profile">Yonatan Karp</a></div>
+                <div class="post-artist">Artist : lonely island</div>
+                <div class="post-album_song">Album / Song : turtleneck and chain</div>
+                <div class="post-genre">Genre : Rap</div>
+                <div class="post-content">
+                    When the Lonely Island's parodic viral rap anthem "I'm on a Boat" snagged a Grammy nomination in 2009, guest singer T-Pain expressed a bit of confusion: This thing was a lark, a skit for "Saturday Night Live" and (maybe more to the point) for YouTube, and here it is, getting one of the highest honors T-Pain will probably ever get. In "We're Back!", the opening track of their sophomore album, Turtleneck & Chain, Lonely Island member Jorma Taccone points out how weird that was: "Lonely Island! Grammy nominated!"-- this right after Andy Samberg raps about how his dick looks like "the fat that you cut off a steak." "We're Back!" is an absurd, overblown take on the intro to every self-aggrandizing blockbuster rap album ever, but Turtleneck & Chain could well outsell plenty of the stuff it spoofs. Ridiculous as it may be, these guys are now something resembling pop stars. And no 2011 album has a list of guests as star-studded as this one: Justin Timberlake, Rihanna, Nicki Minaj, Akon. They may be fake rappers, but real rappers don't have that kind of pull anymore.<br/>
+                    And since they're pop stars now, the Lonely Island face a familiar problem on Turtleneck & Chain: How do you follow up a big debut album without just repeating all the same tricks? These guys are, after all, "Saturday Night Live" employees, and repeating tricks is what "Saturday Night Live" does. Turtleneck & Chain brings back a few characters from debut album Incredibad: Shy Ronnie, the "Dick in the Box" guys. And, for the most part, it recycles what made Incredibad work. The Lonely Island guys make jokes out of rap music but do it without mocking the genre, putting lifetimes of fandom in service of absurdist jokes that get progressively more absurd as the songs go on, bringing their superstar guests along for the ride. Michael Bolton, for instance, just kills his bit on "Jack Sparrow", wailing his absurdly catchy dorked-out movie-fan chorus and refusing to let the Lonely Island people stick with their boring club jam. Lesser comics would've just made fun of Michael Bolton's past; on this album, he actually gets something to do.<br/>
+                    Of course, "Jack Sparrow" had a funny-as-hell video on "Saturday Night Live", and it doesn't play as well without its visuals. That's a problem here. Of the tracks that already appeared on "SNL", some of them work just fine on their own, like the infectiously joyous Akon collab "I Just Had Sex" or "Threw It on the Ground", a devastating but affectionate skewering of Dead Prez/Immortal Technique-style conspiracy-theory rap. Others, like "Shy Ronnie 2: Ronnie & Clyde", are visual jokes that just don't make any sense without their videos, though it definitely helps that a DVD of those videos comes with the CD. The non-TV tracks generally don't hold up as well, but it's fun to match them up with their inspirations. "Rocky", for example, pushes the already-jokey premise of DJ Jazzy Jeff & the Fresh Prince's "I Think I Can Beat Mike Tyson" to gory extremes, and "Trouble on Dookie Island" turns the breathless crime narrative of something like Ghostface Killah's "Shakey Dog" into a gross-out joke by having its desperate thug narrators shit themselves over and over and over.<br/>
+                    Throughout Turtleneck & Chain, the Lonely Island play around way more with dick and shit jokes than they did on their first album-- and for a group whose first massive success already had the word "dick" in its title, that's saying something. Some of it is absolutely terrible; the "Falcor vs. Atreyu" skit, in which Neverending Story characters fuck each other, is obnoxious enough to clear out a room at a Wolf Eyes show, and the intentionally annoying "Japan" hits its mark a little too well. For the most part, though, these are good songs with jokes in them, not jokes with songs attached.<br/>
+                    An album full of fake rap, famous-people cameos, and scatological jokes shouldn't have any replay value whatsoever, but Turtleneck & Chain holds up awfully well, partly because the music is almost always, at the very least, listenable, and partly because the jokes depend more on earwormy hooks and absurdities spinning out of control than on simple punchlines. The guest stars here all give some indication of why they're stars; Nicki Minaj's verse on "The Creep", for example, is just a great Nicki guest verse. (The Lonely Island guys themselves don't rap or sing anywhere near as well as their guests, but they're sketch comics and writers, not pop stars, so we can cut them some slack.) And even if these songs work best as "SNL" sketches, they should still work nicely on your next road trip.
+                </div>
+            </div>
+            <br/>
+                <div align="center" id="randID4" class="favorits-link" onclick="addPostToFavorites(this);">add this post to your favorites</div>
+            <br/><br/>
+            <div>
+                <form class="ui-input-text">
+                    <ul class="ui-listview">
+                        <li data-role="list-divider" class="ui-li ui-li-divider ui-bar-b ui-first-child">
+                        </li>
+                        <li data-role="list-divider" class="ui-li ui-li-divider ui-bar-b ui-first-child">
+                            Write new comment
+                        </li>
+                        <li data-role="fieldcontain" class="ui-field-contain ui-body ui-li ui-li-static ui-btn-up-b">
+                            <input type="text" name="subject" placeholder="Subject">
+                        </li>
+                        <li data-role="fieldcontain" class="ui-field-contain ui-body ui-li ui-li-static ui-btn-up-b">
+                            <textarea id="send-message-textarea" cols="170" rows="168" name="content"></textarea>
+                        </li>
+                    </ul>
+                    <input type="button" value="Post new comment">
+                </form>
+                 <ul data-role="listview" data-inset="false" data-icon="false" data-divider-theme="b" class="ui-listview">
+                        <li data-role="list-divider" class="ui-li ui-li-divider ui-bar-b ui-first-child">
+                        </li>
+                        <li data-role="list-divider" class="ui-li ui-li-divider ui-bar-b ui-first-child">
+                            All comments
+                        </li>
+                                             <li class="ui-btn-active ui-btn-icon-left">
+                        <p class="ui-li-aside ui-li-desc message-date"><strong>Apr 19,&nbsp;</strong>2014</p>                        
+                        <div class="message-sender">
+                            Yuval Bar-Zik
+                        </div>
+                        <div class="message-content">
+                            Amazing album
+                        </div>
+                    </li>
+                    <li class="ui-btn-active ui-btn-icon-left">
+                        <p class="ui-li-aside ui-li-desc message-date"><strong>Apr 19,&nbsp;</strong>2014</p>                        
+                        <div class="message-sender">
+                            Yonatan Karp
+                        </div>
+                        <div class="message-content">
+                            Great album
+                        </div>
+                    </li>
+                 </ul>   
+            </div>
+
+            <!-- Footer starts here! -->
+            <footer data-role="footer" data-position="fixed" data-tap-toggle="false" data-theme="b" class="ui-footer ui-bar-b ui-footer-fixed slideup" role="contentinfo" data-id="main-footer"></footer>
+        </section>
+        
+        <!-- 1st Demo message -->
+        <section id="demo-message001" data-role="page" class="ui-page ui-body-b"> 
+            <!-- Header starts here! -->
+            <div data-role="header" id="source-header" data-id="main-header" data-position="fixed" data-tap-toggle="false" data-theme="b" class="ui-header ui-bar-b ui-header-fixed slidedown" role="banner"></div>        
+            <div class="bubbles-container">
+                <div class="bubbledLeft">
+                <br/><br/><br/>
+                ._________________.
+                </div>
+                <div class="bubbledLeft">
+                It's a whale
+                </div>
+                <div class="bubbledRight">
+                ... how do you still have friends?!
+                </div>
+                <div class="bubbledLeft">
+                <br/><br/>
+                .__________.
+                </div>
+                <div class="bubbledLeft">
+                baby whale
+                </div>
+                <div id="new_messages"></div>
+            </div><br/>
+            
+            <div>
+                <form method="post" action="#index">
+                    <ul class="ui-listview">
+                        <li data-role="fieldcontain" class="ui-field-contain ui-body ui-li ui-li-static ui-btn-up-b">
+                        <br></li>                       
+                        <li data-role="fieldcontain" class="ui-field-contain ui-body ui-li ui-li-static ui-btn-up-b">
+                            <textarea id="replay" cols="170" rows="168" name="content" placeholder="replay"></textarea>
+                        </li>
+                    </ul>
+                    <input type="button" value="send replay" onclick="addNewMessage()">
+                </form>                
+            </div>
+            
+            <div data-role="footer" data-id="main-footer" data-position="fixed" data-tap-toggle="false" data-theme="b" class="ui-footer ui-bar-b ui-footer-fixed slideup" role="contentinfo"></div>        
+        </section>
+
+   
+        <!-- a Call to the Java Script file -->
+        <script src="js/script.js"></script>
+    
+</html>
